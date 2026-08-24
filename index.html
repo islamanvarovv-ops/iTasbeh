@@ -1373,6 +1373,14 @@
         const pwaInstallBtn = document.getElementById('pwaInstallBtn');
         const pwaDismissBtn = document.getElementById('pwaDismissBtn');
         let deferredPrompt = null;
+        // Service Worker-ni ro'yxatdan o'tkazish
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('Service Worker ro\'yxatdan o\'tdi:', reg))
+            .catch(err => console.error('Service Worker xatosi:', err));
+    });
+}
 
         // 1. Ilova allaqachon o'rnatilganini tekshirish
         const isStandalone = window.matchMedia('(display-mode: standalone)').matches
